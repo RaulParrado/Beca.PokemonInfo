@@ -54,6 +54,7 @@
             Delete an attack by attack id
             </summary>
             <param name="attackId">The attack id we want to delete</param>
+            <param name="pokemonId">The pokemon id we want to delete an attack from</param>
             <returns>An ActionResult</returns>
             <response code="204">Returns no content</response>
             <response code="404">Returns notFound if the attack id does not exist</response>
