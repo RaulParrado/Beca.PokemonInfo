@@ -8,13 +8,14 @@ using Microsoft.AspNetCore.Mvc;
 namespace Beca.PokemonInfo.API.Controllers
 {
     [Route("api/pokemons/{pokemonId}/attacks")]
-
     [ApiController]
     public class AttacksController : ControllerBase
     {
         private readonly ILogger<AttacksController> _logger;
         private readonly IPokemonInfoRepository _pokemonInfoRepository;
         private readonly IMapper _mapper;
+
+        public object Debug { get; private set; }
 
         public AttacksController(ILogger<AttacksController> logger,
             IPokemonInfoRepository pokemonInfoRepository,
@@ -57,7 +58,7 @@ namespace Beca.PokemonInfo.API.Controllers
         /// <param name="pokemonId">The pokemon we want to see the attacks of</param>
         /// <param name="attackId">The attack id we want</param>
         /// <returns>An ActionResult</returns>
-        /// <response code="200">Returns the requested pokemons</response>
+        /// <response code="200">Returns the requested pokemon attack</response>
         [HttpGet("{attackid}", Name = "GetAttack")]
         public async Task<ActionResult<AttackDto>> GetAttack(
             int pokemonId, int attackId)
@@ -66,7 +67,6 @@ namespace Beca.PokemonInfo.API.Controllers
             {
                 return NotFound();
             }
-
             var attack = await _pokemonInfoRepository
                 .GetAttackForPokemonAsync(pokemonId, attackId);
 
