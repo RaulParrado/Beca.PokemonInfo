@@ -63,10 +63,11 @@ namespace PokemonInfoAPITest
         public async void GetPokemons_OkResult_MustReturn1Attack()
         {
             var ataque = await _attacksController.GetAttack(1,1);
-            Debug.WriteLine(ataque);
-            var okResult = Assert.IsType <ActionResult<AttackDto>> (ataque);
+            Debug.WriteLine("HOLA"+ataque);
+            var okResult = Assert.IsType <OkObjectResult> (ataque);
+            Debug.WriteLine(okResult);
             var DTO = Assert.IsAssignableFrom<AttackDto>(okResult.Value);
-            //Assert.Equal("Ataque 1", DTO.Name);
+            Assert.Equal("Ataque 1", DTO.Name);
             Assert.NotNull(ataque);
         }
 

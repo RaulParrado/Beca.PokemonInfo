@@ -80,7 +80,7 @@ namespace Beca.PokemonInfo.API.Services
             int attackId)
         {
             return await _context.Attacks
-               .Where(a => a.PokemonId == pokemonId && a.Id == attackId)
+               .Where(a => a.PokemonId == pokemonId && a.Id == attackId).OrderBy(x => x.Name)
                .FirstOrDefaultAsync();
         }
 

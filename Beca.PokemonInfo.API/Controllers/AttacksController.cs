@@ -35,7 +35,7 @@ namespace Beca.PokemonInfo.API.Controllers
         /// <param name="pokemonId">The pokemon we want to see the attacks of</param>
         /// <returns>An ActionResult</returns>
         /// <response code="200">Returns the requested attacks</response>
-        [HttpGet]
+        [HttpGet()]
         public async Task<ActionResult<IEnumerable<AttackDto>>> GetAttacks(
             int pokemonId)
         {
@@ -59,8 +59,8 @@ namespace Beca.PokemonInfo.API.Controllers
         /// <param name="attackId">The attack id we want</param>
         /// <returns>An ActionResult</returns>
         /// <response code="200">Returns the requested pokemon attack</response>
-        [HttpGet("{attackid}", Name = "GetAttack")]
-        public async Task<ActionResult<AttackDto>> GetAttack(
+        [HttpGet("{attackId}", Name = "GetAttack")]
+        public async Task<IActionResult> GetAttack(
             int pokemonId, int attackId)
         {
             if (!await _pokemonInfoRepository.PokemonExistsAsync(pokemonId))
@@ -83,7 +83,7 @@ namespace Beca.PokemonInfo.API.Controllers
         /// <param name="attack">The values to create the attack</param>
         /// <returns>An ActionResult</returns>
         /// <response code="200">Returns the requested pokemons</response>
-        [HttpPost]
+        [HttpPost()]
         public async Task<ActionResult<AttackDto>> CreateAttack(
            int pokemonId,
            AttackForCreateOrUpdateDto attack)
@@ -119,7 +119,7 @@ namespace Beca.PokemonInfo.API.Controllers
         /// <param name="attack">The values to update the attack</param>
         /// <returns>An ActionResult</returns>
         /// <response code="200">Returns the requested pokemons</response>
-        [HttpPut("{attackid}")]
+        [HttpPut("{attackId}")]
         public async Task<ActionResult> UpdateAttack(int pokemonId, int attackId,
             AttackForCreateOrUpdateDto attack)
         {
@@ -150,7 +150,7 @@ namespace Beca.PokemonInfo.API.Controllers
         /// <param name="patchDocument">The values to update the attack</param>
         /// <returns>An ActionResult</returns>
         /// <response code="200">Returns the requested pokemons</response>
-        [HttpPatch("{attackid}")]
+        [HttpPatch("{attackId}")]
         public async Task<ActionResult> PartiallyUpdateAttack(
             int pokemonId, int attackId,
             JsonPatchDocument<AttackForCreateOrUpdateDto> patchDocument)
