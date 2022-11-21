@@ -19,7 +19,7 @@
             <param name="pokemonId">The pokemon we want to see the attacks of</param>
             <param name="attackId">The attack id we want</param>
             <returns>An ActionResult</returns>
-            <response code="200">Returns the requested pokemons</response>
+            <response code="200">Returns the requested pokemon attack</response>
         </member>
         <member name="M:Beca.PokemonInfo.API.Controllers.AttacksController.CreateAttack(System.Int32,Beca.PokemonInfo.API.Models.AttackForCreateOrUpdateDto)">
             <summary>

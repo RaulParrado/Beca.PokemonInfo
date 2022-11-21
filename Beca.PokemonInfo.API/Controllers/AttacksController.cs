@@ -8,13 +8,14 @@ using Microsoft.AspNetCore.Mvc;
 namespace Beca.PokemonInfo.API.Controllers
 {
     [Route("api/pokemons/{pokemonId}/attacks")]
-
     [ApiController]
     public class AttacksController : ControllerBase
     {
         private readonly ILogger<AttacksController> _logger;
         private readonly IPokemonInfoRepository _pokemonInfoRepository;
         private readonly IMapper _mapper;
+
+        public object Debug { get; private set; }
 
         public AttacksController(ILogger<AttacksController> logger,
             IPokemonInfoRepository pokemonInfoRepository,
@@ -34,7 +35,7 @@ namespace Beca.PokemonInfo.API.Controllers
         /// <param name="pokemonId">The pokemon we want to see the attacks of</param>
         /// <returns>An ActionResult</returns>
         /// <response code="200">Returns the requested attacks</response>
-        [HttpGet]
+        [HttpGet()]
         public async Task<ActionResult<IEnumerable<AttackDto>>> GetAttacks(
             int pokemonId)
         {
@@ -57,16 +58,15 @@ namespace Beca.PokemonInfo.API.Controllers
         /// <param name="pokemonId">The pokemon we want to see the attacks of</param>
         /// <param name="attackId">The attack id we want</param>
         /// <returns>An ActionResult</returns>
-        /// <response code="200">Returns the requested pokemons</response>
-        [HttpGet("{attackid}", Name = "GetAttack")]
-        public async Task<ActionResult<AttackDto>> GetAttack(
+        /// <response code="200">Returns the requested pokemon attack</response>
+        [HttpGet("{attackId}", Name = "GetAttack")]
+        public async Task<IActionResult> GetAttack(
             int pokemonId, int attackId)
         {
             if (!await _pokemonInfoRepository.PokemonExistsAsync(pokemonId))
             {
                 return NotFound();
             }
-
             var attack = await _pokemonInfoRepository
                 .GetAttackForPokemonAsync(pokemonId, attackId);
 
@@ -83,7 +83,7 @@ namespace Beca.PokemonInfo.API.Controllers
         /// <param name="attack">The values to create the attack</param>
         /// <returns>An ActionResult</returns>
         /// <response code="200">Returns the requested pokemons</response>
-        [HttpPost]
+        [HttpPost()]
         public async Task<ActionResult<AttackDto>> CreateAttack(
            int pokemonId,
            AttackForCreateOrUpdateDto attack)
@@ -119,7 +119,7 @@ namespace Beca.PokemonInfo.API.Controllers
         /// <param name="attack">The values to update the attack</param>
         /// <returns>An ActionResult</returns>
         /// <response code="200">Returns the requested pokemons</response>
-        [HttpPut("{attackid}")]
+        [HttpPut("{attackId}")]
         public async Task<ActionResult> UpdateAttack(int pokemonId, int attackId,
             AttackForCreateOrUpdateDto attack)
         {
@@ -150,7 +150,7 @@ namespace Beca.PokemonInfo.API.Controllers
         /// <param name="patchDocument">The values to update the attack</param>
         /// <returns>An ActionResult</returns>
         /// <response code="200">Returns the requested pokemons</response>
-        [HttpPatch("{attackid}")]
+        [HttpPatch("{attackId}")]
         public async Task<ActionResult> PartiallyUpdateAttack(
             int pokemonId, int attackId,
             JsonPatchDocument<AttackForCreateOrUpdateDto> patchDocument)

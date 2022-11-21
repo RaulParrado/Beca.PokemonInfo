@@ -2,9 +2,9 @@ using AutoMapper;
 
 namespace Beca.PokemonInfo.API.Profiles
 {
-    public class PointOfInterestProfile : Profile
+    public class AttackProfile : Profile
     {
-        public PointOfInterestProfile()
+        public AttackProfile()
         {
             CreateMap<Entities.Attack, Models.AttackDto>();
             CreateMap<Models.AttackForCreateOrUpdateDto, Entities.Attack>();
